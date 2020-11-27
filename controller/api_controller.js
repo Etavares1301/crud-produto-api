@@ -30,7 +30,7 @@ exports.deletar = async function(req, res, next) {
             .input('id', idProduto)
             .query('select * from TB_PRODUTO where ID = @id');
         if (produtoEncontrado.recordset.length == 0) {
-            res.send("Produto não encontrado!!");
+            res.send(404, "Produto não encontrado!!");
         } else {
             let Produto = await conexao.request()
                 .input('id', idProduto)
@@ -52,7 +52,7 @@ exports.atualizar = async function(req, res, next) {
             .input('id', idProduto)
             .query('select * from TB_PRODUTO where ID = @id');
         if (ProdutosEncontrado.recordset.length == 0) {
-            res.send('Produto não Encontadro!!');
+            res.send(404, 'Produto não Encontadro!!');
         } else {
             let Produtos = await conexao.request()
                 .input('id', idProduto)
@@ -86,7 +86,7 @@ exports.buscar = async function(req, res, next){
         .query('SELECT NOME AS \'nome\', DESCRICAO AS \'descricao\', ID AS \'id\' FROM TB_PRODUTO WHERE ID = @id')
 
         if(buscarproduto.recordset.length == 0 ){
-            res.send("Usuário não encontrado");
+            res.send(404, "Produto não encontrado");
         }else{
             res.send(buscarproduto.recordsets);
         }
